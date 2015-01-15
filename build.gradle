@@ -1,0 +1,40 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.1.RELEASE")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'spring-boot'
+
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+
+// 中身が空でも jar { } は必要
+// これがないと spring-boot の assembly などが働かず、依存 jar もパッケージングされず、
+// マニフェストの Main-Class も作られなくなってしまう
+jar {
+    // この名前.jar が生成される。指定がないと rootProject.name が使われる
+    // baseName = 'hello-spring'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-web") {
+        exclude module: "spring-boot-starter-tomcat" // tomcat 外して
+    }
+    compile("org.springframework.boot:spring-boot-starter-jetty") // jetty 入れる
+    compile("org.springframework.boot:spring-boot-starter-actuator")
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.1'
+}
