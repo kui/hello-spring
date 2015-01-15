@@ -14,7 +14,7 @@ Spring Boot を使ってみたプロジェクト
 ソースコードのダウンロードからアプリケーションを実行するまで:
 
 ```bash
-$ git clone ...
+$ git clone git@github.com:kui/hello-spring.git
 $ ./gradlew build
 $ java -jar build/libs/hello-spring.jar
 ```
